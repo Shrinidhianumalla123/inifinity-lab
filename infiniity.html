@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DonateDirect – Connecting Donors with NGOs</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<script>
+var now = new Date();
+document.write("Current Date and Time: + now);
+</script>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: url("https://cdn.pixabay.com/photo/2016/11/29/03/14/adult-1869430_1280.jpg")
+            no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    header {
+        background: rgba(26, 115, 232, 0.85);
+        padding: 20px 40px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(4px);
+    }
+
+    header h1 { margin: 0; font-size: 28px; }
+
+    nav a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    .hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 60px 40px;
+        background: rgba(233, 241, 255, 0.85);
+        border-radius: 12px;
+        margin: 40px;
+        backdrop-filter: blur(4px);
+    }
+
+    .hero-text { max-width: 500px; }
+
+    .hero h2 {
+        font-size: 42px;
+        margin-bottom: 10px;
+        color: #0a2a64;
+    }
+
+    .hero p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+   
+    .open-btn {
+        padding: 12px 22px;
+        font-size: 16px;
+        background: #1a73e8;
+        border: none;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .open-btn:hover { background: #0b57c2; }
+
+    .section-title {
+        text-align: center;
+        font-size: 32px;
+        margin-top: 50px;
+
+        margin-bottom: 20px;
+        color: #0a2a64;
+        text-shadow: 1px 1px 3px rgba(255,255,255,0.7);
+    }
+
+    .ngos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 0 40px 40px;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(3px);
+    }
+
+    .card h3 { margin-top: 0; color: #0a2a64; }
+    .card p { color: #444; }
+
+    .card button {
+        margin-top: 10px;
+        padding: 10px 18px;
+
+        background: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .card button:hover { background: #0b57c2; }
+
+    .sdg-box {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 25px;
+        margin: 40px;
+        border-radius: 14px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        backdrop-filter: blur(4px);
+        border-left: 8px solid #e5243b;
+    }
+
+    .sdg-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 12px;
+        object-fit: contain;
+        background: white;
+        padding: 5px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .sdg-content h3 {
+        margin: 0;
+        font-size: 24px;
+        color: #0a2a64;
+        font-weight: 700;
+    }
+
+    .sdg-content p {
+        margin-top: 8px;
+        font-size: 18px;
+        color: #333;
+        line-height: 1.5;
+
+    }
+
+    footer {
+        background: rgba(10, 42, 100, 0.9);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        backdrop-filter: blur(4px);
+        margin-top: 40px;
+    }
+
+ 
+    #openForm {
+        display: none;
+    }
+
+    #openForm:checked ~ .popup {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .popup {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease;
+    }
+
+    .popup-box {
+        background: white;
+        padding: 25px;
+        width: 340px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .popup-box h2 {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #0a2a64;
+    }
+
+    .popup-box input,
+    .popup-box select,
+    .popup-box textarea {
+        width: 100%;
+        padding: 10px;
+
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .popup-box button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 12px;
+
+        background: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .popup-box button:hover { background: #0b57c2; }
+
+    .close-btn {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        color: red;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div id="datetime-box" style="
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+">
+    Loading...
+</div>
+<input type="checkbox" id="openForm">
+<header>
+    <h1>DonateDirect</h1>
+    <nav>
+        <a href="infiniity.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="ngos.html">NGOs</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+        <h2>Make a Direct Impact for Rural Families</h2>
+        <p>DonateDirect connects generous donors with trusted NGOs helping rural communities with education, food security, women empowerment, and healthcare.</p>
+
+       
+        <label for="openForm" class="open-btn">Start Donating</label>
+    </div>
+
+    <img src="Rural support.jpg"
+         alt="Rural support" width="420"
+         style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1)">
+</section>
+
+<h2 class="section-title">Featured NGOs</h2>
+
+<section class="ngos">
+    <div class="card">
+        <h3>RuralCare Foundation</h3>
+        <p>Providing essential food kits and hygiene items to families in remote villages.</p>
+        <a href="https://www.ruralhealthcarefoundation.com/about-us/" target="_blank">
+            <button>Support Now</button>
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>EduBridge Trust</h3>
+        <p>Helping rural children access digital learning resources and school supplies.</p>
+        <a href="https://www.education-bridge.com/" target="_blank">
+            <button>Support Now</button>
+        </a>
+
+    </div>
+    <div class="card">
+        <h3>WomenRise Initiative</h3>
+        <p>Empowering rural women with small-business tools and vocational training.</p>
+       <a href="https://camfed.org/now-is-the-time-2/?msclkid=c8335129d98910f15e6e3835c17da8e5&utm_source=bing&utm_medium=cpc&utm_campaign=Search%3ANonbrand&utm_term=charities%20organizations&utm_content=Nonbrand%20Keywords" target="_blank">
+            <button>Support Now</button>
+       </a>
+
+    </div>
+</section>
+
+<div class="sdg-box">
+    <img src="sdg logo 1.png"
+         class="sdg-img"
+         alt="SDG 1 No Poverty">
+
+    <div class="sdg-content">
+        <h3>Aligned with SDG 1: No Poverty</h3>
+        <p>
+            DirectDonate aligns with <strong>SDG 1 (No Poverty)</strong> by helping donors directly
+            support essential needs like food, clothing, education, and medical aid.
+        </p>
+    </div>
+</div>
+
+
+<footer>
+    © 2025 DonateDirect | Empowering Rural Communities
+</footer>
+
+
+<div class="popup">
+    <div class="popup-box">
+        <h2>Donation Form</h2>
+
+
+        <input type="text" placeholder="Full Name">
+        <input type="email" placeholder="Email Address">
+
+        <select>
+            <option>Select NGO</option>
+            <option>RuralCare Foundation</option>
+            <option>EduBridge Trust</option>
+            <option>WomenRise Initiative</option>
+        </select>
+
+        <input type="number" placeholder="Donation Amount (₹)">
+
+        <select>
+            <option>Payment Type</option>
+            <option>UPI</option>
+            <option>Credit/Debit Card</option>
+            <option>Net Banking</option>
+            <option>PayPal</option>
+        </select>
+
+        <textarea rows="3" placeholder="Message (optional)"></textarea>
+
+        <button>Donate Now</button>
+
+        <label class="close-btn" for="openForm">Close</label>
+    </div>
+</div>
+
+
+
+<script>
+    function updateDateTime() {
+        const now = new Date();
+        document.getElementById("datetime-box").innerHTML =
+            now.toLocaleString();
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+</script>
+
+
+
+</body>
+</html>

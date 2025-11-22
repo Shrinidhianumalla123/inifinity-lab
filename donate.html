@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Records</title>
+
+<style>
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f4f6fb;
+    margin: 0;
+    padding: 20px;
+}
+
+.topnav {
+    background-color: navy;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.topnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.topnav a:hover {
+    background-color: #00337a;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: 600;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+button {
+    background: #1a73e8;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #1358b8;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #e8f0fe;
+}
+</style>
+</head>
+
+<body>
+
+
+<div class="topnav">
+    <a href="infiniity.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="ngos.html">Ngos</a>
+    <a href="donate.html">Donate</a>
+    <a href="contact.html">Contact</a>
+</div>
+
+<div class="container">
+    <h2>Transaction Entry</h2>
+
+    <label>Transaction ID</label>
+    <input type="text" id="t_id" placeholder="Enter Transaction ID">
+
+    <label>Customer Name</label>
+    <input type="text" id="t_name" placeholder="Enter Customer Name">
+
+    <label>Amount (₹)</label>
+    <input type="number" id="t_amount" placeholder="Enter Amount">
+
+    <label>Transaction Type</label>
+    <select id="t_type">
+        <option value="Credit">Credit</option>
+        <option value="Debit">Debit</option>
+    </select>
+
+    <button onclick="addTransaction()">Add Transaction</button>
+
+    <h2 style="margin-top: 40px;">Stored Transactions</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody id="transactionTable">
+        </tbody>
+    </table>
+</div>
+
+<script>
+function addTransaction() {
+    let id = document.getElementById("t_id").value;
+    let name = document.getElementById("t_name").value;
+    let amount = document.getElementById("t_amount").value;
+    let type = document.getElementById("t_type").value;
+
+    if (id === "" || name === "" || amount === "") {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    let table = document.getElementById("transactionTable");
+
+    let row = `<tr>
+                <td>${id}</td>
+                <td>${name}</td>
+                <td>₹${amount}</td>
+                <td>${type}</td>
+              </tr>`;
+
+    table.innerHTML += row;
+
+    document.getElementById("t_id").value = "";
+    document.getElementById("t_name").value = "";
+    document.getElementById("t_amount").value = "";
+}
+</script>
+
+</body>
+</html>
